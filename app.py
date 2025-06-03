@@ -6,6 +6,9 @@ import logging
 import datetime
 import shutil
 import asyncio
+import threading
+import time
+import requests
 from pathlib import Path
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_file, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -2564,28 +2567,11 @@ def get_video_url():
             return jsonify({'error': 'URL manquante'}), 400
             
         video_url = data['url']
-        return jsonify({
-            'success': True,
-            'url': video_url
-        })
-    except Exception as e:
-        logger.error(f"Erreur lors de la récupération de l'URL: {str(e)}")
-        return jsonify({'error': str(e)}), 500
-    try:
-        # Récupérer les données JSON
-        data = request.json
-        if not data:
-            return jsonify({'error': 'Aucune donnée reçue'}), 400
-            
-        video_url = data.get('url')
         anime_id = data.get('anime_id')
         season_num = data.get('season_num')
         episode_num = data.get('episode_num')
         
-        if not video_url or not anime_id or not season_num or not episode_num:
-            return jsonify({'error': 'Paramètres manquants'}), 400
-            
-        logger.info(f"Téléchargement direct depuis {video_url} pour anime {anime_id}, saison {season_num}, épisode {episode_num}")
+        logger.info(f"Récupération de l'URL vidéo pour anime {anime_id}, saison {season_num}, épisode {episode_num}")
         
         # Récupérer les informations de l'anime
         anime_data = load_anime_data()
@@ -2684,6 +2670,19 @@ def download_file(anime_id, season_num, episode_num):
     except Exception as e:
         logger.error(f"Erreur lors du téléchargement du fichier: {str(e)}")
         return jsonify({'error': f'Erreur serveur: {str(e)}'}), 500
+
+def keep_alive():
+    while True:
+        try:
+            # Remplace l'URL par celle de ton site Render
+            requests.get("https://ton-app-onrender.com/")
+            print("Ping envoyé pour garder le serveur actif")
+        except Exception as e:
+            print(f"Erreur lors du ping : {e}")
+        time.sleep(1 * 60)  # 14 minutes
+
+# Démarre le thread au lancement de l'app
+threading.Thread(target=keep_alive, daemon=True).start()
 
 if __name__ == '__main__':
     import argparse
