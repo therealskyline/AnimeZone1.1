@@ -1349,7 +1349,7 @@ def search():
                                 other_anime_list=recent_animes)
 
         # Définir une limite de temps pour la recherche API
-        api_timeout = 60  # Augmenté pour One Piece
+        api_timeout = 90  # Augmenté pour One Piece
 
         # Nombre maximum de résultats (sans limite)
         MAX_RESULTS = 100  # Augmenté comme demandé
@@ -2679,7 +2679,7 @@ def keep_alive():
             print("Ping envoyé pour garder le serveur actif")
         except Exception as e:
             print(f"Erreur lors du ping : {e}")
-        time.sleep(1 * 60)  # 14 minutes
+        time.sleep(14 * 60)  # 14 minutes
 
 # Démarre le thread au lancement de l'app
 threading.Thread(target=keep_alive, daemon=True).start()
