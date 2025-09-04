@@ -2685,6 +2685,8 @@ def keep_alive():
 threading.Thread(target=keep_alive, daemon=True).start()
 
 if __name__ == '__main__':
+    import argparse
+    
     # Précharger les animes populaires avant le démarrage du serveur
     with app.app_context():
         try:
@@ -2692,6 +2694,18 @@ if __name__ == '__main__':
             logger.info("Préchargement des animes populaires effectué avant le démarrage du serveur")
         except Exception as e:
             logger.error(f"Erreur lors du préchargement des animes populaires: {e}")
-
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    
+    # Créer un parser pour les arguments en ligne de commande
+    parser = argparse.ArgumentParser(description='Serveur AnimeStream')
+    
+    # Utiliser le port défini par l'environnement Replit si disponible, sinon 8080
+    default_port = int(os.environ.get('PORT', 8080))
+    parser.add_argument('--port', type=int, default=default_port, help=f'Port sur lequel démarrer le serveur (défaut: {default_port})')
+    parser.add_argument('--host', type=str, default='0.0.0.0', help='Hôte sur lequel démarrer le serveur (défaut: 0.0.0.0)')
+    
+    # Analyser les arguments
+    args = parser.parse_args()
+    
+    # Démarrer le serveur avec les arguments spécifiés
+    print(f"Démarrage du serveur sur {args.host}:{args.port}")
+    app.run(host=args.host, port=args.port, debug=True)
