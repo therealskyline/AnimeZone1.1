@@ -13,7 +13,7 @@ app = application
 if __name__ == "__main__":
     # Configuration de développement
     debug_mode = True if os.environ.get('ENV') == 'development' else False
-    port = int(os.environ.get('PORT', 0000))
+    port = int(os.environ.get('PORT', 8080))
     
     # Forcer l'utilisation de 0.0.0.0 pour la compatibilité
     app.run(host="0.0.0.0", port=port, debug=debug_mode)

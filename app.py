@@ -2675,7 +2675,7 @@ def keep_alive():
     while True:
         try:
             # Remplace l'URL par celle de ton site Render
-            requests.get("https://animezone1-1.onrender.com")
+            requests.get("https://animezone1-1.onrender.comuhhhh")
             print("Ping envoyé pour garder le serveur actif")
         except Exception as e:
             print(f"Erreur lors du ping : {e}")
@@ -2699,7 +2699,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Serveur AnimeStream')
     
     # Utiliser le port défini par l'environnement Replit si disponible, sinon 8080
-    default_port = int(os.environ.get('PORT', 0000))
+    default_port = int(os.environ.get('PORT', 8080))
     parser.add_argument('--port', type=int, default=default_port, help=f'Port sur lequel démarrer le serveur (défaut: {default_port})')
     parser.add_argument('--host', type=str, default='0.0.0.0', help='Hôte sur lequel démarrer le serveur (défaut: 0.0.0.0)')
     

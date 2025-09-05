@@ -10,7 +10,7 @@ from app import app
 
 if __name__ == "__main__":
     # Définir le port (utiliser 5000 pour être compatible avec Replit)
-    port = int(os.environ.get("PORT", 0000))
+    port = int(os.environ.get("PORT", 5000))
     
     print(f"Démarrage d'AnimeZone sur le port {port}...")
     print(f"Dossier des templates: {app.template_folder}")

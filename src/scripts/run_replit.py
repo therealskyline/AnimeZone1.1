@@ -34,7 +34,7 @@ def main():
     kill_existing_servers()
     
     # Obtenir le port depuis l'environnement (Replit définit normalement PORT=443)
-    port = os.environ.get("PORT", "0.0.0.0")
+    port = os.environ.get("PORT", "5000")
     
     # Imprimer des informations utiles
     print(f"Démarrage d'AnimeZone sur le port {port}")
