@@ -2675,7 +2675,7 @@ def keep_alive():
     while True:
         try:
             # Remplace l'URL par celle de ton site Render
-            requests.get("https://animezone1-1.onrender.comuhhhh")
+            requests.get("https://test-l7ug.onrender.com")
             print("Ping envoyé pour garder le serveur actif")
         except Exception as e:
             print(f"Erreur lors du ping : {e}")
