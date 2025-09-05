@@ -46,7 +46,7 @@ def main():
     kill_existing_servers()
     
     # Obtenir le port depuis l'environnement (Replit définit cette variable)
-    port = os.environ.get("PORT", "8080")
+    port = os.environ.get("PORT", "10000")
     
     # Imprimer des informations utiles
     print(f"Démarrage de l'application AnimeZone sur le port {port}")
